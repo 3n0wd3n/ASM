@@ -23,3 +23,7 @@ Potom když máme soubor main.c, demo.asm, Makefile stačí už jen do konzole n
     
     $ make -f Makefile
     $ ./main
+
+Co taky doporučuju je gedit
+
+    $ sudo apt install gedit
