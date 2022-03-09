@@ -24,6 +24,6 @@ Potom když máme soubor main.c, demo.asm, Makefile stačí už jen do konzole n
     $ make -f Makefile
     $ ./main
 
-Co taky doporučuju je gedit
+Co taky doporučuju je gedit -> lepší textový editor než vi a vim nebo nano (podle mě) 
 
     $ sudo apt install gedit
