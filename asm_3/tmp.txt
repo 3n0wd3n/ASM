@@ -1,0 +1,15 @@
+int main(int){
+int a = 42;
+int *p = &a;
+infref(p);
+printf(a);
+return 0;
+}
+
+void incref(int *p);
+
+ASM
+move edx, [rdi]
+add edx, 1
+mov [rdi], edx
+ref 
