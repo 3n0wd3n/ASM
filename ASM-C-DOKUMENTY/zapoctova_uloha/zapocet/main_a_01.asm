@@ -29,7 +29,7 @@ print_str_done:
 
 triangle:
 	mov rcx, 0					; nastavime hodnotu counteru na nulu
-	mov rbx, rsi				; velikost těch odvěsen
+	mov rbx, rsi				; velikost těch odvěsen (druhy parametr funkce, rdi by byl prvni parametr což je buff)
 								; mozne lazeni vstupu
 	cmp rbx, 0
 	je undefined				; kdyz je velikost odvesen rovna nule
@@ -74,31 +74,38 @@ small_triangle:
 	ret
 
 signpost:
-	mov r10, 0					; sloupec
-	mov r11, 0					; radek
+	mov r10, 0					; sloupec R8
+	mov r11, 0					; radek R9
 	jmp first_floor				; tisk prvniho patra
 
-after_first_floor:
-	sub rsi, 2					; odectu prvni a posledni radek RSI
-	mov byte [rdi + rcx], 42	; prvni hvezda v rade
-	add rcx, 1					; zvisim hodnotu counteru
-
-row:
-	mov byte [rdi + rcx], 46
-	add rcx, 1					; zvisim hodnotu counteru
-	add r11, 1
-	cmp r10, r11
-	jne row
+first_floor:
 	mov byte [rdi + rcx], 42
 	add rcx, 1					; zvisim hodnotu counteru
 	mov byte [rdi + rcx], 10
 	add rcx, 1					; zvisim hodnotu counteru
-	add r10, 1
-	mov r11, 0
-	cmp r10, rsi
-	jne after_first_floor
-	add rsi, 2
-	mov r10, r9
+	jmp after_first_floor
+
+after_first_floor:
+	sub rbx, 2					; odectu prvni a posledni radek RSI respektive rbx
+	mov byte [rdi + rcx], 42	; prvni hvezda v rade
+	add rcx, 1					; zvisim hodnotu counteru
+
+row:
+	mov byte [rdi + rcx], 46	; pridam tecku
+	add rcx, 1					; zvisim hodnotu counteru
+	add r11, 1					; zvisim hodnotu radku
+	cmp r10, r11				; porovnani sloupce a radku
+	jne row						; jestli se sloupce nerovna radku, tak pokracujeme v cyklu
+	mov byte [rdi + rcx], 42
+	add rcx, 1					; zvisim hodnotu counteru
+	mov byte [rdi + rcx], 10	; odradkujeme
+	add rcx, 1					; zvisim hodnotu counteru
+	add r10, 1					; pokracujeme dalsim radkem
+	mov r11, 0					; vynulujeme radek
+	cmp r10, rbx				; porovname jestli se sloupec rovna patrum
+	jne after_first_floor		
+	add rbx, 2					; pro plny posledni radek musime velikost odvesen vratin na puvodni hodnotu
+	mov r10, rbx
 
 last_row:
 	mov byte [rdi + rcx], 42
@@ -108,12 +115,6 @@ last_row:
 	jne last_row
 	ret
 	
-first_floor:
-	mov byte [rdi + rcx], 42
-	add rcx, 1					; zvisim hodnotu counteru
-	mov byte [rdi + rcx], 10
-	add rcx, 1					; zvisim hodnotu counteru
-	jmp after_first_floor
 	
 
 
