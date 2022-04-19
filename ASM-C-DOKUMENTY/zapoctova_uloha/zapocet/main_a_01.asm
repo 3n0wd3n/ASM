@@ -74,8 +74,8 @@ small_triangle:
 	ret
 
 signpost:
-	mov r10, 0					; sloupec R8
-	mov r11, 0					; radek R9
+	mov r10, 0					; sloupec
+	mov r11, 0					; radek
 	jmp first_floor				; tisk prvniho patra
 
 after_first_floor:
