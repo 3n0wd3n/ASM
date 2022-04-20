@@ -1,4 +1,5 @@
 ;definovani globalnich funkci
+global str_to_int
 global print_str
 global triangle
 
@@ -6,6 +7,38 @@ global triangle
 SYS_WRITE	equ 1
 SYS_EXIT	equ 60
 STDOUT	equ 1
+
+;#########PRVNI ULOHA##########
+
+str_to_int:
+	mov rax, 0					; registr ktery vracim s prevedenym cislem
+	mov rbx, 0					; counter pro urceni delky retezce
+	mov rcx, 0					; countr pro pomoc s posuvem 
+	mov rdx, 10					; registr pro dočasne uchovani mocniny
+	jmp length_of_string
+
+print_char_loop:
+	mov al, byte [rdi + rcx] 
+	add rcx, 1
+	cmp al, 0
+	jmp convert_to_ascii
+	je print_char_loop
+
+convert_to_ascii:
+	sub rax, 48
+	jmp power
+
+power:
+	
+
+length_of_string:
+	mov al, byte [rdi + rcx] 
+	add rcx, 1
+	add, rbx
+	cmp al, 0
+	je length_of_string
+
+;#########DRUHA ULOHA##########
 
 print_str:
 	mov rcx, 0					; nastavime hodnotu counteru na nulu --> oddelene kvuli tomu, abychom si nevynulovavaly counter
@@ -24,6 +57,8 @@ print_str_done:
 	mov rdx, rcx				; delka retezce (pocet charu bez \0)
 	syscall
 	ret
+
+;#########TRETI ULOHA##########
 
 ;note for me (dot in ASCII is 46 | star in ASCII is 42 | new line in ASCII is 10)
 
