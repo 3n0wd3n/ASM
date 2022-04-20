@@ -12,32 +12,45 @@ STDOUT	equ 1
 
 str_to_int:
 	mov rax, 0					; registr ktery vracim s prevedenym cislem
-	mov rbx, 0					; counter pro urceni delky retezce
+	mov r8, 0					; registr pro urceni delky retezce - 2 kvuli mocninam 
+	mov r9, 0					; registr pro pomocne scitani cisel jako mezivypocet
+	mov r10, 0					; registr pro uchovani delky retezce mezi cykly
 	mov rcx, 0					; countr pro pomoc s posuvem 
 	mov rdx, 1					; registr pro dočasne uchovani mocniny
-	jmp length_of_string
+	jmp length_of_string		; skaceme na navesti, ktere nam pomuze zjistit delku retezce
 
 print_char_loop:
-	mov al, byte [rdi + rcx] 
-	add rcx, 1
+	mov r8, r10
+	sub r8, rcx
+	jmp power_loop
+	multiplication_of_number:
+		mov al, byte [rdi + rcx] 
+		add rcx, 1
+		sub al, 48
+		imul rax, rdx
+		add r9, rax
 	cmp al, 0
-	je print_char_loop
+	jne print_char_loop
+	ret
 
 power_loop:
 	imul rdx, rsi
-	sub rbx, 1
-	cmp rbx, 0
+	sub r8, 1
+	cmp r8, 0
 	jne power_loop
+	jmp multiplication_of_number
 
 length_of_string:
 	mov al, byte [rdi + rcx] 
 	add rcx, 1
-	add rbx, 1
+	add r8, 1
 	cmp al, 0
 	jne length_of_string
-	; mov rcx, 0
-	mov rax, rbx
-	ret
+	mov rcx, 0
+	sub r8, 2
+	; mov rax, r8				; test jestli je delka retezce takova jaka chci
+	mov r10, r8
+	jmp print_char_loop
 
 ;#########DRUHA ULOHA##########
 
