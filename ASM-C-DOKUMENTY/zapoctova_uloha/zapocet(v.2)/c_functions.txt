@@ -1,0 +1,19 @@
+// unsigned int str_to_uint(char* s, unsigned int base) {
+//     int sum = 0;
+
+//     for (int i = 0; s[i] != 0; ++i) {
+
+//         int value = s[i];
+//         sum = sum * base;
+
+//         value -= 48;
+
+//         if (value > 9) {
+//             value -= 7;
+//         }
+
+//         sum += value;
+//     }
+
+//     return sum;
+// };
