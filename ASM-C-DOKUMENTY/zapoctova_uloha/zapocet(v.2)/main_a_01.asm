@@ -14,29 +14,30 @@ str_to_int:
 	mov rax, 0					; registr ktery vracim s prevedenym cislem
 	mov rbx, 0					; counter pro urceni delky retezce
 	mov rcx, 0					; countr pro pomoc s posuvem 
-	mov rdx, 10					; registr pro dočasne uchovani mocniny
+	mov rdx, 1					; registr pro dočasne uchovani mocniny
 	jmp length_of_string
 
 print_char_loop:
 	mov al, byte [rdi + rcx] 
 	add rcx, 1
 	cmp al, 0
-	jmp convert_to_ascii
 	je print_char_loop
 
-convert_to_ascii:
-	sub rax, 48
-	jmp power
-
-power:
-	
+power_loop:
+	imul rdx, rsi
+	sub rbx, 1
+	cmp rbx, 0
+	jne power_loop
 
 length_of_string:
 	mov al, byte [rdi + rcx] 
 	add rcx, 1
-	add, rbx
+	add rbx, 1
 	cmp al, 0
-	je length_of_string
+	jne length_of_string
+	; mov rcx, 0
+	mov rax, rbx
+	ret
 
 ;#########DRUHA ULOHA##########
 
