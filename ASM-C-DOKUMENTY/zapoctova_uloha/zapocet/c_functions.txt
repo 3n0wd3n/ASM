@@ -1,0 +1,72 @@
+// Template for assembler
+//
+// void triangle(char buf, unsigned int size){
+//     char rdi = buf;
+//     int rsi = size;
+
+//     rsi -= 2; // prvni a posledni patro nebude staveno v cyklu
+//     int r8 = 0; // sloupcova pozice
+//     int r9 = 0; // radkova pozice
+//     int rcx = 0; // celkova pozice
+
+
+//     // prvni patro
+//     rdi[rcx] = '';
+//     rcx++;
+//     rdi[rcx] = '\n';
+//     rcx++;
+
+
+//     while (r8 != rsi){
+//         // prvni X v radku
+//         rdi[rcx] = '';
+//         rcx++;
+
+//         //stavime radek
+//         while(r9 != r8){
+//             rdi[rcx] = '.';
+//             rcx++;
+//             r9++;
+//         }
+
+//         // pokud se randkova pozice = sloupcove => jsme na konci radku
+//         rdi[rcx] = '';
+//         rcx++;
+//         rdi[rcx] = '\n';
+//         rcx++;
+//         r8++; // muzeme prejit na dalsi radek
+//         r9 = 0; // jsme na zacatku radku
+//     }
+
+//     rsi += 2;   // vratime rsi na puvodni velikost
+//     r8 = rsi;
+//     // postavime posledni radek
+
+//     while (r8 != 0){
+//         rdi[rcx] = '';
+//         rcx++;
+//         r8--;
+//     }
+//     rdi[rcx] = '\0';
+// };
+
+
+// unsigned int str_to_uint(char* s, unsigned int base) {
+//     int sum = 0;
+
+//     for (int i = 0; s[i] != 0; ++i) {
+
+//         int value = s[i];
+//         sum = sum * base;
+
+//         value -= 48;
+
+//         if (value > 9) {
+//             value -= 7;
+//         }
+
+//         sum += value;
+//     }
+
+//     return sum;
+// };

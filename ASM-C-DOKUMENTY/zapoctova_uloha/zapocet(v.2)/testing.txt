@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int answer(int number);
+void print_str_lecture(char *dst, char *src);
+void print_str(char *s);
+
+int main(){
+
+    // test
+    printf("Testing answer to life which is %i\n", answer(42));
+
+    // tisknuti retezce (pomocný kod)
+    char *duplicate = malloc(1024);
+    print_str_lecture(duplicate, "Hello Test!");
+    printf("%s\n", duplicate);
+    free(duplicate);
+    
+    // tisknuti retezce
+    print_str("Hi!");
+    return 0;
+}
+
+
+;definovani externich funkci
+global answer
+global print_str_lecture
+global print_str
+
+;deklarace konstant
+SYS_WRITE	equ 1
+SYS_EXIT	equ 60
+STDOUT	equ 1
+
+;sekce s definicemi vlastnich navesti s kody
+section .text
+
+;testovaci funkce
+answer:
+	mov eax, edi
+	ret
+
+;funkce z hodiny pro prepis retezce na pointer
+print_str_lecture:
+	mov al, byte [rsi] 
+	mov byte [rdi], al
+	cmp al, 0
+	je done
+	add rdi, 1
+	add rsi, 1
+	jmp print_str_lecture
+
+done:
+	ret
+
+;funkce ktera pomoci systemoveho volani vypise retezec na standartni vystup
+print_str:
+	mov rcx, 0	; nastavime hodnotu counteru na nulu --> oddelene kvuli tomu, abychom si nevynulovavaly counter
+
+point_string_loop:
+	mov al, byte [rdi + rcx]	; do registru al si nahrajeme aktualni char cyklu 
+	add rcx, 1	; inkrementujeme promennou counter
+	cmp al, 0	; porovname jestli nahodou nejsme na konci retezce
+	je print_string_int ; jestli jsme, tak muzeme jit tisknout
+	jmp point_string_loop	; jestli ne, tak se vracime zpatky na navesti 
+
+print_string_int:
+	mov rax, SYS_WRITE
+	mov rsi, rdi	; registr do ktereho ulozime adresu retezce
+	mov rdi, STDOUT
+	mov rdx, rcx	; delka retezce (pocet charu bez \0)
+	syscall
+	ret
+
+section .data
+
+
+
+####################################
+
+undefined:
+	mov byte [rdi + rcx], 85
+	add rcx, 1
+	mov byte [rdi + rcx], 78
+	add rcx, 1
+	mov byte [rdi + rcx], 68
+	add rcx, 1
+	mov byte [rdi + rcx], 69
+	add rcx, 1
+	mov byte [rdi + rcx], 70
+	add rcx, 1
+	mov byte [rdi + rcx], 73
+	add rcx, 1
+	mov byte [rdi + rcx], 78
+	add rcx, 1
+	mov byte [rdi + rcx], 69
+	add rcx, 1
+	mov byte [rdi + rcx], 68
+
+###################################
