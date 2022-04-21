@@ -29,3 +29,7 @@ Co taky doporučuju je gedit -> lepší textový editor než vi a vim nebo nano 
     $ sudo apt install gedit
 
 ![image](https://user-images.githubusercontent.com/47132583/157517398-a1b0323c-e08d-47e9-ae3a-bb2d8614294c.png)
+
+Cesta na desktop (NOTEBOOK)
+
+    cd /mnt/c/Users/johny/Desktop/
