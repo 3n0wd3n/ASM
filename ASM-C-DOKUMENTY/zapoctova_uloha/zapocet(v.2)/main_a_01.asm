@@ -7,6 +7,7 @@ global triangle
 SYS_WRITE	equ 1
 SYS_EXIT	equ 60
 STDOUT	equ 1
+; BUFFER_SIZE	equ 5000		
 
 ;#########PRVNI ULOHA##########
 
@@ -15,29 +16,38 @@ str_to_int:
 	mov r8, 0					; registr pro urceni delky retezce - 2 kvuli mocninam 
 	mov r9, 0					; registr pro pomocne scitani cisel jako mezivypocet
 	mov r10, 0					; registr pro uchovani delky retezce mezi cykly
+	mov r11b, 0					; registr pro uchovani puvodni hodnoty registeru al
 	mov rcx, 0					; countr pro pomoc s posuvem 
 	mov rdx, 1					; registr pro dočasne uchovani mocniny
 	jmp length_of_string		; skaceme na navesti, ktere nam pomuze zjistit delku retezce
 
-print_char_loop:
-	mov r8, r10
-	sub r8, rcx
+char_loop:
+	mov r8, r10		; r8 = 2
+	sub r8, rcx		; r8 - rcx --> 2 - 0, 2 - 1 = 1
+	mov rdx, 1		; rdx = 1 vzdy musim nastavit registr pro uchovani mocniny na jedna aby v kazdem cyklu power_loop zacinal jednickou
+	cmp r8, 0
+	je power_loop_special	; mocnina pro cislo 10 ^ 0
 	jmp power_loop
 	multiplication_of_number:
-		mov al, byte [rdi + rcx] 
-		add rcx, 1
-		sub al, 48
-		imul rax, rdx
-		add r9, rax
-	cmp al, 0
-	jne print_char_loop
-	ret
+		mov al, byte [rdi + rcx] 	 
+		add rcx, 1		; rcx + 1 = 1
+		mov r11b, al			; r11b = al	musim si zapamatovat puvodni hodnotu al predtim nez budu posouvat o -48 jinak bych nikdy z cyklu nevyskocil protoze al by se nerovnalo nikdy nule
+		sub al, 48				; prevadim string na int 
+		imul rax, rdx			; 1 * 100 = 100, 2 * 10 = 20, 3 uvadim cislo na spravny rad
+		add r9, rax		; r9 + 100 --> r9 = 100 v prvním
+		cmp r11b, 0				; mozna chyba
+		jne char_loop
+		mov rax, r9
+		ret
 
-power_loop:
-	imul rdx, rsi
-	sub r8, 1
-	cmp r8, 0
+power_loop:						; cyklus, ktery nam pomaha udelat mocninu
+	imul rdx, rsi	; rdx * rsi --> 1 * 10 = 10, 10 * 10 = 100, 
+	sub r8, 1		; r8 - 1 --> 2 - 1 = 1, 1 - 1 = 0
+	cmp r8, 0					
 	jne power_loop
+	jmp multiplication_of_number
+
+power_loop_special:
 	jmp multiplication_of_number
 
 length_of_string:
@@ -47,10 +57,10 @@ length_of_string:
 	cmp al, 0
 	jne length_of_string
 	mov rcx, 0
-	sub r8, 2
-	; mov rax, r8				; test jestli je delka retezce takova jaka chci
-	mov r10, r8
-	jmp print_char_loop
+	sub r8, 2	; r8 = 2
+	; mov rax, r8 -> test jestli je delka retezce takova jaka chci
+	mov r10, r8		; r10 = 2
+	jmp char_loop
 
 ;#########DRUHA ULOHA##########
 
@@ -169,3 +179,25 @@ last_row:
 	cmp r10, 0					; porovnam odvesnu s nulou jestli už nejsem na konci cyklu
 	jne last_row
 	ret
+
+;#########CTVRTA ULOHA##########
+
+; _start:
+; 	mov rax, SYS_READ			; nacteme data ze standartniho vstupu (konzole)
+; 	mov rdi, STDIN
+; 	mov rsi, input_to_buff
+; 	mov rdx, BUFFER_SIZE
+; 	syscall
+; 	mov rdi, rsi				; vloží hodnotu bufferu na prvni argument funkce
+; 	mov rsi, 10					; určíme jaky základ bude mit číslo, ktere prevadime ze str na int
+; 	call str_to_int
+; 	mov rsi, rax				; vložíme druhy argument 
+; 	call triangle				; zavolame funkci trojuhelni
+; 	call print_str				; zavolame funkci tisknuti retezce
+; 	mov rax, SYS_EXIT			; ukonceni programu
+; 	mov rdi, 42					; nahrajeme do rdi 
+; 	syscall
+
+; section .bss
+; input_to_buff:
+; 	resb BUFFER_SIZE

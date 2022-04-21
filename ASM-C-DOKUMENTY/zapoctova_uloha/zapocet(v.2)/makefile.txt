@@ -1,0 +1,8 @@
+assigment-01: assigment-01.o 
+    ld -o assigment-01 assigment-01.o
+
+main.o: main.c
+    gcc -c main.c
+
+assigment-01.o: assigment-01.asm
+    nasm -f elf64 assigment-01.asm
