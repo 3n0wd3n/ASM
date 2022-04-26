@@ -1,6 +1,6 @@
 # ASM
 
-Pro to abychom byli schopni to spustit na Windowsech musíme udělat následující.
+Proto, abychom byli schopni to spustit na Windowsech musíme udělat následující.
 
 Mingw64 je využití zabudované linuxové komponenty "Windows Subsystem for Linux", jedná se vlastně o zabudovaný plnohodnotný linuxový terminál ve Windowsu (je potřeba alespoň Windows 10)
 
