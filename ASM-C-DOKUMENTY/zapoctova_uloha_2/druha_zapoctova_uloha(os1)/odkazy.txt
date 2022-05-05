@@ -1,0 +1,10 @@
+https://pubs.opengroup.org/onlinepubs/7908799/xsh/unistd.h.html
+https://www.geeksforgeeks.org/fork-system-call/
+https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
+https://linuxize.com/post/gzip-command-in-linux/
+PROBLEM WITH fork() FUNCTION ON WINDOWS https://stackoverflow.com/questions/8819673/undefined-reference-to-fork-in-codeblocks-editor-in-windows-os
+https://stackoverflow.com/questions/35860794/how-to-print-argv-arguments-from-main-function-in-c
+https://www.youtube.com/watch?v=OVFEWSP7n8c
+https://linuxhint.com/exec_linux_system_call_c/
+https://www.youtube.com/watch?v=cex9XrZCU14
+https://stackoverflow.com/questions/72127274/how-to-take-argument-from-c-and-use-it-as-a-function/72132265#72132265
