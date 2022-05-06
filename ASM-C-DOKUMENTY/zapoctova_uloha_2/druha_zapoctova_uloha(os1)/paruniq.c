@@ -32,16 +32,23 @@ void *routine()
 
 int main(int argc, char *argv[])
 {
-    // testing the argument of the function
-    printf("%s\n", argv[1]);
-    printf("It lives\n");
-    // thread_one stores the information about thread and its data typy is p_thread
-    pthread_t thread_one, thread_two;
-    // creating the thread
-    pthread_create(&thread_one, NULL, &routine, NULL);
-    pthread_create(&thread_two, NULL, &routine, NULL);
-    // waiting untill exectuion is finished
-    pthread_join(thread_one, NULL);
-    pthread_join(thread_two, NULL);
+    if (argc > 1)
+    {
+        // testing the argument of the function
+        printf("%s\n", argv[1]);
+        printf("It lives\n");
+        // thread_one stores the information about thread and its data typy is p_thread
+        pthread_t thread_one, thread_two;
+        // creating the thread
+        pthread_create(&thread_one, NULL, &routine, NULL);
+        pthread_create(&thread_two, NULL, &routine, NULL);
+        // waiting untill exectuion is finished
+        pthread_join(thread_one, NULL);
+        pthread_join(thread_two, NULL);
+    }
+    else
+    {
+        printf("Unsuficient amount of arguments.\n");
+    }
     return 0;
 }
