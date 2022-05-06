@@ -13,3 +13,6 @@ https://stackoverflow.com/questions/72127274/how-to-take-argument-from-c-and-use
 DRUHY UKOL
 https://www.youtube.com/watch?v=xoXzp4B8aQk
 https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2
+https://stackoverflow.com/questions/5157337/c-reading-command-line-parameters
+https://www.youtube.com/watch?v=beq14396XMk
+https://stackoverflow.com/questions/72145138/how-can-i-get-arguments-from-standard-input-in-c

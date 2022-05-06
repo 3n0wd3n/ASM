@@ -11,7 +11,7 @@ SPOUŠTĚNÍ souboru (v UBUNTU-18.04 WSL)
 $ gcc paruniq.c -o paruniq --> budeme používat rozšířenou kompilace $ gcc -g -pthread paruniq.c -o paruniq
 $ ./paruniq
 
-KROKY pro splění úlohy 
+KROKY pro splění úlohy
 
 1. Do paměti počítače je načten celý obsah souboru.
     - ze standartního vstupu načíst řádky (echo -e "foo\nbar\nbaz\nfoo\nbar" | ./paruniq 2)
@@ -21,7 +21,8 @@ KROKY pro splění úlohy
 
 */
 
-void* routine(){
+void *routine()
+{
     printf("Test from thread\n");
     sleep(2);
     printf("Ending thread\n");
@@ -29,7 +30,9 @@ void* routine(){
 
 // this simple function is making two threads salmultaniously and we can se this in terminal
 
-int main(int argc, char* argv[]){
+int main(int argc, char *argv[])
+{
+
     printf("It lives\n");
     // thread_one stores the information about thread and its data typy is p_thread
     pthread_t thread_one, thread_two;
