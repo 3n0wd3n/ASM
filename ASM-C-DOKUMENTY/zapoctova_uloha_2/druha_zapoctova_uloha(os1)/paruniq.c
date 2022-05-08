@@ -36,6 +36,9 @@ int main(int argc, char *argv[])
     {
         // testing the argument of the function
         printf("%s\n", argv[1]);
+        char line[BUFSIZ];
+        fgets(line, sizeof(line), stdin);
+        printf("stdin: %s\n", line);
         printf("It lives\n");
         // thread_one stores the information about thread and its data typy is p_thread
         pthread_t thread_one, thread_two;
