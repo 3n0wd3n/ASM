@@ -10,7 +10,7 @@
 
 SPOUŠTĚNÍ souboru (v UBUNTU-18.04 WSL)
 
-$ gcc paruniq.c -o paruniq --> budeme používat rozšířenou kompilace $ gcc -g -pthread paruniq.c -o paruniq
+$ gcc paruniq-final.c -o paruniq --> budeme používat rozšířenou kompilace $ gcc -g -pthread paruniq.c -o paruniq
 $ ./paruniq
 
 KROKY pro splění úlohy 
