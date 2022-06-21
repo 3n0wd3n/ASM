@@ -1,4 +1,4 @@
-# ASM
+# ASM | WINAPI | C
 
 Proto, abychom byli schopni to spustit na Windowsech musíme udělat následující.
 
